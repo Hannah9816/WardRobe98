@@ -1,0 +1,36 @@
+﻿@model WardRobe.Models.Backpack
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2 style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Delete Backpack</h2>
+
+
+<h4 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Are you sure you want to Delete this?</h4>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TripName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TripName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wardrobe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wardrobe)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,47 @@
+﻿@model WardRobe.Models.Haul
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2 style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Delete Haul</h2>
+
+<h4 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Are you sure you want to Delete this?</h4>
+
+<div>
+    <h4>Backpack</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Category
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PartitionKey)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.clothes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.clothes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="category" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

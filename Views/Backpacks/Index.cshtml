@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<WardRobe.Models.Backpack>
+
+@{
+    ViewData["Title"] = "Index";
+    var backpack = (List<Backpack>)ViewData["bacpack"];
+}
+
+<h2 class="text-center" style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">My Backpack</h2>
+<p>
+    <a class="btn btn-info" asp-action="Create"> Create New </a>
+</p>
+
+<form>
+    <p>
+        Trip Name: @Html.DropDownList("Tripname", "All")
+
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TripName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wardrobe)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wardrobe)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

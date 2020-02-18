@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WardRobe.Models.Wardrobe>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-center" style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">My Wardrobe</h2>
+
+<p>
+    <a class="btn btn-info" asp-action="Create"> Create New </a>
+</p>
+
+<form>
+    <p>
+        Name : <input type="text" name="searchString">
+        <br />
+        <br />
+        Category: @Html.DropDownList("WardrobeName", "All")
+
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<div class="container">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" style="margin-bottom:25px">
+            <div class="thumbnail">
+                <div class="image" style="margin-bottom:20px">
+                    <img class="img-responsive" src="@item.ImageUrl" height="350" width="240" />
+                </div>
+                <div class="caption" style="border-top:3px solid #808080; text-align:center">
+                    <h3><a asp-action="Details" asp-route-id="@item.ID">@item.Name</a></h3>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+

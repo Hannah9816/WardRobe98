@@ -40,7 +40,14 @@
                     @Html.DisplayFor(modelItem => item.TripName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Wardrobe)
+                    <div class="col-md-3" style="margin-bottom:10px">
+                        <div style="text-align:center">
+                            <h5>@item.Wardrobe</h5>
+                        </div>
+                        <div class="image" style="margin-bottom:20px">
+                            <img class="img-responsive" src="@item.ImageUrl" height="330" width="220" />
+                        </div>
+                    </div>
                 </td>
 
                 <td>

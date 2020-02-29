@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,16 +14,28 @@ namespace WardRobe.Views.MixnMatches
     public class MixnMatchesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public MixnMatchesController(ApplicationDbContext context)
+        public MixnMatchesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: MixnMatches
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MixnMatch.ToListAsync());
+            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
+
+            var userid = _userManager.GetUserId(HttpContext.User);
+
+            var mixnmatch = from m in _context.MixnMatch select m;
+
+            if (!String.IsNullOrEmpty(userid))
+            {
+                mixnmatch = mixnmatch.Where(m => m.UserId.Contains(userid));
+            }
+            return View(await mixnmatch.AsNoTracking().ToListAsync());
         }
 
         // GET: MixnMatches/Details/5
@@ -46,6 +59,14 @@ namespace WardRobe.Views.MixnMatches
         // GET: MixnMatches/Create
         public IActionResult Create()
         {
+            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
+
+            var userid = _userManager.GetUserId(HttpContext.User);
+
+            var wardrobe = from m in _context.Wardrobe select m;
+
+            ViewData["wardrobe"] = wardrobe.Where(m => m.UserId.Contains(userid)).ToList();
+
             return View();
         }
 
@@ -54,10 +75,27 @@ namespace WardRobe.Views.MixnMatches
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Top,Bottom,UserId")] MixnMatch mixnMatch)
+        public async Task<IActionResult> Create([Bind("ID,Top,Bottom,UserId, TopImage, TopName, BottomImage, BottomFile")] MixnMatch mixnMatch)
         {
+            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
             if (ModelState.IsValid)
             {
+                //Get file based on chosen wardrobe
+                string top = mixnMatch.Top;
+                if (!String.IsNullOrEmpty(top))
+                {
+                    var usermatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(top));
+                    mixnMatch.TopUrl = usermatch.ImageUrl;
+                    mixnMatch.TopFile = usermatch.FileName;
+                }
+
+                string bottom = mixnMatch.Bottom;
+                if (!String.IsNullOrEmpty(top))
+                {
+                    var usermatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(bottom));
+                    mixnMatch.BottomUrl = usermatch.ImageUrl;
+                    mixnMatch.BottomFile = usermatch.FileName;
+                }
                 _context.Add(mixnMatch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -78,6 +116,12 @@ namespace WardRobe.Views.MixnMatches
             {
                 return NotFound();
             }
+            var userid = _userManager.GetUserId(HttpContext.User);
+
+            var wardrobe = from m in _context.Wardrobe select m;
+
+            ViewData["wardrobe"] = wardrobe.Where(m => m.UserId.Contains(userid)).ToList();
+
             return View(mixnMatch);
         }
 
@@ -86,7 +130,7 @@ namespace WardRobe.Views.MixnMatches
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Top,Bottom,UserId")] MixnMatch mixnMatch)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Top,Bottom,UserId, TopImage, TopName, BottomImage, BottomFile")] MixnMatch mixnMatch)
         {
             if (id != mixnMatch.ID)
             {
@@ -97,6 +141,24 @@ namespace WardRobe.Views.MixnMatches
             {
                 try
                 {
+
+                    //Get file based on chosen wardrobe
+                    string top = mixnMatch.Top;
+                    if (!String.IsNullOrEmpty(top))
+                    {
+                        var usermatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(top));
+                        mixnMatch.TopUrl = usermatch.ImageUrl;
+                        mixnMatch.TopFile = usermatch.FileName;
+                    }
+
+                    string bottom = mixnMatch.Bottom;
+                    if (!String.IsNullOrEmpty(top))
+                    {
+                        var usermatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(bottom));
+                        mixnMatch.BottomUrl = usermatch.ImageUrl;
+                        mixnMatch.BottomFile = usermatch.FileName;
+                    }
+
                     _context.Update(mixnMatch);
                     await _context.SaveChangesAsync();
                 }

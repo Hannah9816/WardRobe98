@@ -21,7 +21,8 @@ namespace WardRobe.Models
         public DateTime EndDate { get; set; }
 
         public string UserId { get; set; }
-
         public int Wardrobe { get; set; }
+        public string ImageUrl { get; set; }
+        public string FileName { get; set; }
     }
 }

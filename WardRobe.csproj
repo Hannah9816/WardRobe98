@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-WardRobe-42A93C4F-6EA4-40E3-9273-CB6502B7BD44</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/f8b58ca2-8b17-4356-95db-d0a3a9b5e0ed/resourcegroups/wardrobeResourceGroup/providers/microsoft.insights/components/WardRobe16</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>

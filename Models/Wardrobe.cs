@@ -19,7 +19,7 @@ namespace WardRobe.Models
         [DataType(DataType.Date)]
         public DateTime PurchaseDate { get; set; }
 
-        [Range(1, 100)]
+        [Range(1, 5000)]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,3)")]
         [Display(Name = "Purchased Price")]

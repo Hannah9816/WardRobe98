@@ -26,27 +26,46 @@ namespace WardRobe.Views.Wardrobes
             _context = context;
             _userManager = userManager;
         }
-
-        // GET: Wardrobes
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Home()
         {
-
             ViewBag.userid = _userManager.GetUserId(HttpContext.User);
 
             var userid = _userManager.GetUserId(HttpContext.User);
 
             var wardrobe = from m in _context.Wardrobe select m;
-            IQueryable<string> TypeQuery = from m in _context.Wardrobe
-                                           orderby m.Name
-                                           select m.Name;
+
+            if (!String.IsNullOrEmpty(userid))
+            {
+                wardrobe = wardrobe.Where(m => m.UserId.Contains(userid) && m.WornTimes<3);
+            }
+
+            return View(await wardrobe.AsNoTracking().ToListAsync());
+        }
+
+        // GET: Wardrobes
+        public async Task<IActionResult> Index(string searchString, string WardRobeCategory)
+        {
+            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
+
+            var userid = _userManager.GetUserId(HttpContext.User);
+
+            var wardrobe = from m in _context.Wardrobe select m;
+            IQueryable<string> TypeQuery = from m in _context.Wardrobe where m.UserId == userid
+                                           orderby m.Category
+                                           select m.Category;
             IEnumerable<SelectListItem> items =
                 new SelectList(await TypeQuery.Distinct().ToListAsync());
 
-            ViewBag.WardrobeName = items;
+            ViewBag.WardrobeCategory = items;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 wardrobe = wardrobe.Where(m => m.Name == searchString && m.UserId.Contains(userid));
+            }
+
+            if (!String.IsNullOrEmpty(WardRobeCategory))
+            {
+                wardrobe = wardrobe.Where(m => m.Category == WardRobeCategory && m.UserId.Contains(userid));
             }
 
             if (!String.IsNullOrEmpty(userid))
@@ -85,7 +104,7 @@ namespace WardRobe.Views.Wardrobes
 
             //Once link, time to read content from connection string
             CloudStorageAccount objectaccount =
-                CloudStorageAccount.Parse(configure["ConnectionStrings:wardrobe1"]);
+                CloudStorageAccount.Parse(configure["ConnectionStrings:wardrobe3"]);
             CloudBlobClient blobclient = objectaccount.CreateCloudBlobClient();
 
             //create the container inside the stroage account

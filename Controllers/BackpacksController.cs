@@ -28,7 +28,9 @@ namespace WardRobe.Views.Backpacks
         {
             var trip = from t in _context.Backpack select t;
 
-            IQueryable<string> TypeQuery = from t in _context.Backpack
+            var userid = _userManager.GetUserId(HttpContext.User);
+
+            IQueryable<string> TypeQuery = from t in _context.Backpack where t.UserId == userid
                                            orderby t.TripName
                                            select t.TripName;
 
@@ -36,8 +38,6 @@ namespace WardRobe.Views.Backpacks
                 new SelectList(await TypeQuery.Distinct().ToListAsync());
 
             ViewBag.userid = _userManager.GetUserId(HttpContext.User);
-
-            var userid = _userManager.GetUserId(HttpContext.User);
 
             ViewBag.Tripname = items;
 
@@ -95,12 +95,20 @@ namespace WardRobe.Views.Backpacks
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TripName,Wardrobe,UserId")] Backpack backpack)
+        public async Task<IActionResult> Create([Bind("Id,TripName,Wardrobe,UserId, ImageUrl, FileName")] Backpack backpack)
         {
             ViewBag.userid = _userManager.GetUserId(HttpContext.User);
 
             if (ModelState.IsValid)
             {
+                //Get file based on chosen wardrobe
+                    string clothes = backpack.Wardrobe;
+                    if (!String.IsNullOrEmpty(clothes))
+                    {
+                        var usermatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(clothes));
+                        backpack.ImageUrl = usermatch.ImageUrl;
+                        backpack.FileName = usermatch.FileName;
+                    }
                 _context.Add(backpack);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -139,7 +147,7 @@ namespace WardRobe.Views.Backpacks
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TripName,Wardrobe,UserId")] Backpack backpack)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TripName,Wardrobe,UserId, ImageUrl, FileName")] Backpack backpack)
         {
             if (id != backpack.Id)
             {
@@ -150,6 +158,15 @@ namespace WardRobe.Views.Backpacks
             {
                 try
                 {
+                    //Get file based on chosen wardrobe
+                    string clothes = backpack.Wardrobe;
+                    if (!String.IsNullOrEmpty(clothes))
+                    {
+                        var usermatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(clothes));
+                        backpack.ImageUrl = usermatch.ImageUrl;
+                        backpack.FileName = usermatch.FileName;
+                    }
+
                     _context.Update(backpack);
                     await _context.SaveChangesAsync();
                 }

@@ -53,8 +53,20 @@ namespace WardRobe.Views.Calendarr
         {
             ViewBag.userid = _userManager.GetUserId(HttpContext.User);
             if (ModelState.IsValid)
+
             {
-                var wardrobe = from m in _context.Wardrobe select m;
+                //Get wardrobe to increase worn times
+                string shirt = calendar.Description;
+                if (!String.IsNullOrEmpty(shirt))
+                
+                {
+                    var shirtmatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(shirt));
+                    int worn = shirtmatch.WornTimes;
+                    worn = worn+1;
+                    shirtmatch.WornTimes = worn;
+                    _context.Update(shirtmatch);
+                    await _context.SaveChangesAsync(); 
+                }
                 _context.Add(calendar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

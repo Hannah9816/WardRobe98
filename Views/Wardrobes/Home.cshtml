@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WardRobe.Models.Wardrobe>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2>Home</h2>
+
+<div class="container">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" style="margin-bottom:25px">
+            <div class="thumbnail" style="width: 100%; height:380px">
+                <div class="thumbnail" style="width: 100%; height:250px; border-color:ghostwhite">
+
+                    <div class="image" style="margin-bottom:20px">
+                        <img class="img-responsive" src="@item.ImageUrl" height="270" width="160" style="display:block; margin-left:auto; margin-right:auto" />
+                    </div>
+
+                </div>
+                <div class="caption" style="border-top:2px solid #808080; text-align:center">
+                    <h3 style="font-family:'Harlow Solid'"><a asp-action="Details" asp-route-id="@item.ID">@item.Name</a></h3>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+

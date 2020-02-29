@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,72 +13,29 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using WardRobe.Data;
 using WardRobe.Models;
 
-namespace WardRobe.Views.Wardrobes
+namespace WardRobe.Views.Recycles
 {
-    public class WardrobesController : Controller
+    public class RecyclesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
 
-        public WardrobesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public RecyclesController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-       
-        public async Task<IActionResult> Home()
+        // GET: Recycles
+        public async Task<IActionResult> Index()
         {
-            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
-        
-            var userid = _userManager.GetUserId(HttpContext.User);
-
-            var wardrobe = from m in _context.Wardrobe select m;
-
-            if (!String.IsNullOrEmpty(userid))
-            {
-                wardrobe = wardrobe.Where(m => m.UserId.Contains(userid) && m.WornTimes<3);
-            }
-
-            return View(await wardrobe.AsNoTracking().ToListAsync());
+            return View(await _context.Recycle.ToListAsync());
         }
-        
 
-        // GET: Wardrobes
-        public async Task<IActionResult> Index(string searchString, string WardRobeCategory)
+        public async Task<IActionResult> User()
         {
-            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
-
-            var userid = _userManager.GetUserId(HttpContext.User);
-
-            var wardrobe = from m in _context.Wardrobe select m;
-            IQueryable<string> TypeQuery = from m in _context.Wardrobe where m.UserId == userid
-                                           orderby m.Category
-                                           select m.Category;
-            IEnumerable<SelectListItem> items =
-                new SelectList(await TypeQuery.Distinct().ToListAsync());
-
-            ViewBag.WardrobeCategory = items;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                wardrobe = wardrobe.Where(m => m.Name == searchString && m.UserId.Contains(userid));
-            }
-
-            if (!String.IsNullOrEmpty(WardRobeCategory))
-            {
-                wardrobe = wardrobe.Where(m => m.Category == WardRobeCategory && m.UserId.Contains(userid));
-            }
-
-            if (!String.IsNullOrEmpty(userid))
-            {
-                wardrobe = wardrobe.Where(m => m.UserId.Contains(userid));
-            }
-
-            return View(await wardrobe.AsNoTracking().ToListAsync());
+            return View(await _context.Recycle.ToListAsync());
         }
 
-        // GET: Wardrobes/Details/5
+        // GET: Recycles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -87,14 +43,14 @@ namespace WardRobe.Views.Wardrobes
                 return NotFound();
             }
 
-            var wardrobe = await _context.Wardrobe
+            var recycle = await _context.Recycle
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (wardrobe == null)
+            if (recycle == null)
             {
                 return NotFound();
             }
 
-            return View(wardrobe);
+            return View(recycle);
         }
 
         private CloudBlobContainer GetCloudBlobContainer()
@@ -115,21 +71,19 @@ namespace WardRobe.Views.Wardrobes
             return container;
         }
 
-        // GET: Wardrobes/Create
+        // GET: Recycles/Create
         public IActionResult Create()
         {
-            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
             return View();
         }
 
-        // POST: Wardrobes/Create
+        // POST: Recycles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Category,Name,Brand,PurchaseDate,Price,WornTimes,ImageUrl,FileName,UserId")] Wardrobe wardrobe, List<IFormFile> files)
+        public async Task<IActionResult> Create([Bind("ID,Name,Type,PhoneNo,Website,Location,ImageUrl,FileName")] Recycle recycle, List<IFormFile> files)
         {
-            ViewBag.userid = _userManager.GetUserId(HttpContext.User);
             if (ModelState.IsValid)
             {
                 //get temporary filepath 
@@ -167,9 +121,9 @@ namespace WardRobe.Views.Wardrobes
 
                         //get uri of the uploaded blob and save in database
                         var blobUrl = blob.Uri.AbsoluteUri;
-                        wardrobe.ImageUrl = blobUrl.ToString();
-                        wardrobe.FileName = FormFile.FileName.ToString();
-                        _context.Add(wardrobe);
+                        recycle.ImageUrl = blobUrl.ToString();
+                        recycle.FileName = FormFile.FileName.ToString();
+                        _context.Add(recycle);
                         await _context.SaveChangesAsync();
 
                         return RedirectToAction(nameof(Index));
@@ -179,10 +133,10 @@ namespace WardRobe.Views.Wardrobes
                 return RedirectToAction(nameof(Create));
 
             }
-            return View(wardrobe);
+            return View(recycle);
         }
 
-        // GET: Wardrobes/Edit/5
+        // GET: Recycles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -190,22 +144,22 @@ namespace WardRobe.Views.Wardrobes
                 return NotFound();
             }
 
-            var wardrobe = await _context.Wardrobe.FindAsync(id);
-            if (wardrobe == null)
+            var recycle = await _context.Recycle.FindAsync(id);
+            if (recycle == null)
             {
                 return NotFound();
             }
-            return View(wardrobe);
+            return View(recycle);
         }
 
-        // POST: Wardrobes/Edit/5
+        // POST: Recycles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Category,Name,Brand,PurchaseDate,Price,WornTimes,ImageUrl,FileName,UserId")] Wardrobe wardrobe, List<IFormFile> files, string filename)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Type,PhoneNo,Website,Location,ImageUrl,FileName")] Recycle recycle, List<IFormFile> files, string filename)
         {
-            if (id != wardrobe.ID)
+            if (id != recycle.ID)
             {
                 return NotFound();
             }
@@ -258,9 +212,9 @@ namespace WardRobe.Views.Wardrobes
 
                         // get the uri of the specific uploaded blob and save it
                         var blobUrl = blob.Uri.AbsoluteUri;
-                        wardrobe.ImageUrl = blobUrl.ToString();
-                        wardrobe.FileName = FormFile.FileName.ToString();
-                        _context.Update(wardrobe);
+                        recycle.ImageUrl = blobUrl.ToString();
+                        recycle.FileName = FormFile.FileName.ToString();
+                        _context.Update(recycle);
                         await _context.SaveChangesAsync();
 
                         return RedirectToAction(nameof(Index));
@@ -268,12 +222,12 @@ namespace WardRobe.Views.Wardrobes
                 }
                 try
                 {
-                    _context.Update(wardrobe);
+                    _context.Update(recycle);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WardrobeExists(wardrobe.ID))
+                    if (!RecycleExists(recycle.ID))
                     {
                         return NotFound();
                     }
@@ -284,10 +238,10 @@ namespace WardRobe.Views.Wardrobes
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(wardrobe);
+            return View(recycle);
         }
 
-        // GET: Wardrobes/Delete/5
+        // GET: Recycles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -295,22 +249,22 @@ namespace WardRobe.Views.Wardrobes
                 return NotFound();
             }
 
-            var wardrobe = await _context.Wardrobe
+            var recycle = await _context.Recycle
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (wardrobe == null)
+            if (recycle == null)
             {
                 return NotFound();
             }
 
-            return View(wardrobe);
+            return View(recycle);
         }
 
-        // POST: Wardrobes/Delete/5
+        // POST: Recycles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id, string filename)
         {
-            var wardrobe = await _context.Wardrobe.FindAsync(id);
+            var recycle = await _context.Recycle.FindAsync(id);
 
             if (filename != null)
             {
@@ -330,15 +284,14 @@ namespace WardRobe.Views.Wardrobes
                 }
             }
 
-            _context.Wardrobe.Remove(wardrobe);
+            _context.Recycle.Remove(recycle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool WardrobeExists(int id)
+        private bool RecycleExists(int id)
         {
-            return _context.Wardrobe.Any(e => e.ID == id);
+            return _context.Recycle.Any(e => e.ID == id);
         }
-
     }
 }

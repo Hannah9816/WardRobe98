@@ -18,5 +18,7 @@ namespace WardRobe.Data
         public DbSet<WardRobe.Models.Trip> Trip { get; set; }
         public DbSet<WardRobe.Models.Wardrobe> Wardrobe { get; set; }
         public DbSet<WardRobe.Models.Calendar> Calendar { get; set; }
+        public DbSet<WardRobe.Models.Recycle> Recycle { get; set; }
+        public DbSet<WardRobe.Models.Contact> Contact { get; set; }
     }
 }

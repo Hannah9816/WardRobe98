@@ -34,10 +34,12 @@
             <div class="navbar-collapse collapse">
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index" style="font-family:Courier New, Courier, monospace; " class="navbar-brand">WardRobe.</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    </ul>
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index" style="font-family:Courier New, Courier, monospace; " class="navbar-brand">WardRobe.</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Recycles" asp-action="Index">Recycle</a></li>
+                    <li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a></li>
+                </ul>
                 }
                 else if (User.Identity.IsAuthenticated)
                 {
@@ -49,6 +51,7 @@
                 <li> <a asp-area="" asp-controller="Backpacks" asp-action="Index">Backpack</a></li>
                 <li> <a asp-area="" asp-controller="Calendars" asp-action="Index">Calendar</a> </li>
                 <li> <a asp-area="" asp-controller="Hauls" asp-action="Index">Haul</a> </li>
+                <li> <a asp-area="" asp-controller="Recycles" asp-action="User">Recycle</a> </li>
             </ul>
                 }
 
@@ -58,7 +61,7 @@
                         <li><a asp-area="" asp-controller="Home" asp-action="Index" style="font-family:Courier New, Courier, monospace; " class="navbar-brand">WardRobe.</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="About">About </a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li><a asp-area="" asp-controller="Contacts" asp-action="Create">Contact Us</a></li>
                     </ul>
                 }
                 <partial name="_LoginPartial" />

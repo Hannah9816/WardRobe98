@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WardRobe.Data;
 
 namespace WardRobe.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200229070832_recycle")]
+    partial class recycle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,31 +226,6 @@ namespace WardRobe.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Calendar");
-                });
-
-            modelBuilder.Entity("WardRobe.Models.Contact", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("PhoneNo");
-
-                    b.Property<string>("Status");
-
-                    b.Property<string>("Subject");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("WardRobe.Models.MixnMatch", b =>

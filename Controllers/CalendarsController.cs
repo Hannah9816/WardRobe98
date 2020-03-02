@@ -62,7 +62,7 @@ namespace WardRobe.Views.Calendarr
                 {
                     var shirtmatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(shirt));
                     int worn = shirtmatch.WornTimes;
-                    worn = worn+1;
+                    worn=worn+1;
                     shirtmatch.WornTimes = worn;
                     _context.Update(shirtmatch);
                     await _context.SaveChangesAsync(); 
@@ -156,6 +156,18 @@ namespace WardRobe.Views.Calendarr
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var calendar = await _context.Calendar.FindAsync(id);
+            //Get wardrobe to decrease worn times
+            string shirt = calendar.Description;
+            if (!String.IsNullOrEmpty(shirt))
+
+            {
+                var shirtmatch = _context.Wardrobe.FirstOrDefault(m => m.Name.Contains(shirt));
+                int worn = shirtmatch.WornTimes;
+                worn=worn-1;
+                shirtmatch.WornTimes = worn;
+                _context.Update(shirtmatch);
+                await _context.SaveChangesAsync();
+            }
             _context.Calendar.Remove(calendar);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

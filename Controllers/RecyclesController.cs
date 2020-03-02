@@ -30,13 +30,30 @@ namespace WardRobe.Views.Recycles
             return View(await _context.Recycle.ToListAsync());
         }
 
-        public async Task<IActionResult> User()
+        public async Task<IActionResult> RecycleCompany()
         {
             return View(await _context.Recycle.ToListAsync());
         }
 
         // GET: Recycles/Details/5
         public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var recycle = await _context.Recycle
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (recycle == null)
+            {
+                return NotFound();
+            }
+
+            return View(recycle);
+        }
+
+        public async Task<IActionResult> CompanyDetails(int? id)
         {
             if (id == null)
             {

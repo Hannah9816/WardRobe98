@@ -10,7 +10,11 @@ namespace WardRobe.Models
     {
         public int ID { get; set; }
         public string Name { get; set;}
+
+        [Display(Name = "Category / Type")]
         public string Type { get; set; }
+
+        [Display(Name = "Contact Number")]
         public string PhoneNo { get; set; }
         public string Website { get; set; }
         public string Location { get; set; }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home";
 }
 
-<h2>Home</h2>
+    <h2 class="text-center" style="font-family:'Harlow Solid'; color:darkturquoise">Hi! You may want to wear this today. </h2>
 
 <div class="container">
 
@@ -20,17 +20,37 @@
 
                 </div>
                 <div class="caption" style="border-top:2px solid #808080; text-align:center">
-                    <h3 style="font-family:'Harlow Solid'"><a asp-action="Details" asp-route-id="@item.ID">@item.Name</a></h3>
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-
-                    </div>
+                    <h3 style="font-family:'Imprint MT Shadow'"><a asp-action="Details" asp-route-id="@item.ID">@item.Name</a></h3>
+                   
                 </div>
             </div>
         </div>
     }
 
+</div>
+
+<div class="container-fluid main-container" style="padding-bottom:20px">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 content">
+            <img src="~/images/cover.png" alt="Microsoft Azure" class="img-responsive" />
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid main-container" style="padding-top:20px; padding-bottom:20px">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 content">
+            <img src="~/images/backpack.png" alt="Microsoft Azure" class="img-responsive" />
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid main-container" style="padding-top:20px; padding-bottom:20px">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10 content">
+            <img src="~/images/messy.png" alt="Microsoft Azure" class="img-responsive" />
+        </div>
+    </div>
 </div>
 
 

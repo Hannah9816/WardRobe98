@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WardRobe.Models.Recycle>
+@{
+    ViewData["Title"] = "User";
+}
+
+<h2 class="text-center" style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Recycling Organisations</h2>
+
+<div class="container">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" style="margin-bottom:25px">
+            <div class="thumbnail" style="width: 100%; height:350px">
+                <div class="thumbnail" style="width: 100%; height:200px; border-color:ghostwhite">
+
+                    <div class="image" style="margin-bottom:20px">
+                        <img class="img-responsive" src="@item.ImageUrl" height="300" width="190" style="display:block; margin-left:auto; margin-right:auto" />
+                    </div>
+
+                </div>
+                <div class="caption" style="border-top:2px solid #808080; text-align:center">
+                    <h3 style="font-family:Ebrima"><a asp-action="CompanyDetails" asp-route-id="@item.ID">@item.Name</a></h3>
+                    
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+
+

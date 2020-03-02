@@ -69,7 +69,7 @@ namespace WardRobe.Views.Trips
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TripName,Date,UserId")] Trip trip)
+        public async Task<IActionResult> Create([Bind("ID,TripName,Date,EndDate,UserId")] Trip trip)
         {
             ViewBag.userid = _userManager.GetUserId(HttpContext.User);
             if (ModelState.IsValid)
@@ -102,7 +102,7 @@ namespace WardRobe.Views.Trips
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,TripName,Date,UserId")] Trip trip)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,TripName,Date,EndDate,UserId")] Trip trip)
         {
             if (id != trip.ID)
             {

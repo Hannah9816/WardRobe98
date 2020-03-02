@@ -38,7 +38,6 @@
                             document.getElementById("calendarId").value = document.getElementById("itemId").innerHTML;
                         }, 5);
                     </script>
-                    <input type="submit" value="Edit" class="btn btn-primary" asp-action="Edit" />
                     <input type="submit" value="Delete" class="btn btn-danger" asp-action="Delete" />
                 </form>
 
@@ -80,6 +79,8 @@
                     return false;
                 },
                 events: '@Url.Action("findall", "ootd")'
+              
+              
             });
         });
     </script>

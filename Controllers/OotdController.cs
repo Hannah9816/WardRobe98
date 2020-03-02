@@ -39,9 +39,13 @@ namespace WardRobe.Controllers
                 description = e.Description,
                 start = e.StartDate.ToString(),
                 end = e.EndDate.ToString(),
-
+            
             }).ToList();
+
             return new JsonResult(events);
         }
+
+        
+
     }
 }

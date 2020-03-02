@@ -37,8 +37,8 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index" style="font-family:Courier New, Courier, monospace; " class="navbar-brand">WardRobe.</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Recycles" asp-action="Index">Recycle</a></li>
-                    <li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a></li>
+                    <li><a asp-area="" asp-controller="Recycles" asp-action="Index">Donate/Recycle</a></li>
+                    <li><a asp-area="" asp-controller="Contacts" asp-action="Index">Messages</a></li>
                 </ul>
                 }
                 else if (User.Identity.IsAuthenticated)
@@ -51,7 +51,8 @@
                 <li> <a asp-area="" asp-controller="Backpacks" asp-action="Index">Backpack</a></li>
                 <li> <a asp-area="" asp-controller="Calendars" asp-action="Index">Calendar</a> </li>
                 <li> <a asp-area="" asp-controller="Hauls" asp-action="Index">Haul</a> </li>
-                <li> <a asp-area="" asp-controller="Recycles" asp-action="User">Recycle</a> </li>
+                <li> <a asp-area="" asp-controller="Recycles" asp-action="RecycleCompany">Donate/Recycle</a> </li>
+                <li><a asp-area="" asp-controller="Contacts" asp-action="Create">Contact Us</a></li>
             </ul>
                 }
 

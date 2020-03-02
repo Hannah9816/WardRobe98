@@ -57,14 +57,14 @@ namespace WardRobe.Views.Contacts
         public async Task<IActionResult> Create([Bind("ID,Name,Email,PhoneNo,Subject,Content,Date,Status")] Contact contact)
         {
            
-
             if (ModelState.IsValid)
             {
                 DateTime todayDate = DateTime.Today;
                 contact.Date = todayDate;
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+                TempData["message"] = "Your message has successfully send to our admin! We will reach you soon.";
+                return RedirectToAction("Create");
             }
             return View(contact);
         }

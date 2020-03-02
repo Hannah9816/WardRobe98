@@ -38,92 +38,94 @@
     @foreach (var item in Model)
     {
         <div class="col-md-3" style="margin-bottom:25px">
-            <div class="thumbnail">
-                <div class="image" style="margin-bottom:20px">
-                    @if (@item.PartitionKey == "Shirt")
-                    {
-                        <img class="img-responsive" src="~/Haul/shirt.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Formal Wear")
-                    {
-                        <img class="img-responsive" src="~/Haul/tuxedo.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Pants")
-                    {
-                        <img class="img-responsive" src="~/Haul/jeans.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Shorts")
-                    {
-                        <img class="img-responsive" src="~/Haul/shorts.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Jacket")
-                    {
-                        <img class="img-responsive" src="~/Haul/sweatshirt.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Skirts")
-                    {
-                        <img class="img-responsive" src="~/Haul/skirt.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Dress")
-                    {
-                        <img class="img-responsive" src="~/Haul/dress.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Ladies Undergarments")
-                    {
-                        <img class="img-responsive" src="~/Haul/bra.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Gents Undergarments")
-                    {
-                        <img class="img-responsive" src="~/Haul/underwear.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Accessories")
-                    {
-                        <img class="img-responsive" src="~/Haul/accessories.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else if (@item.PartitionKey == "Shoes")
-                    {
-                        <img class="img-responsive" src="~/Haul/shoes.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
-                    else
-                    {
-                        <img class="img-responsive" src="~/tailor.png" height="200" width="80" style="display:block; margin-left:auto; margin-right:auto" />
-                    }
+            <div class="thumbnail" style="width: 100%; height:380px">
+                <div class="thumbnail" style="width: 100%; height:200px; border-color:ghostwhite">
+                    <div class="image" style="margin-bottom:20px">
+                        @if (@item.PartitionKey == "Shirt")
+                        {
+                            <img class="img-responsive" src="~/Haul/shirt.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Formal Wear")
+                        {
+                            <img class="img-responsive" src="~/Haul/tuxedo.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Pants")
+                        {
+                            <img class="img-responsive" src="~/Haul/jeans.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Shorts")
+                        {
+                            <img class="img-responsive" src="~/Haul/shorts.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Jacket")
+                        {
+                            <img class="img-responsive" src="~/Haul/sweatshirt.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Skirts")
+                        {
+                            <img class="img-responsive" src="~/Haul/skirt.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Dress")
+                        {
+                            <img class="img-responsive" src="~/Haul/dress.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Ladies Undergarments")
+                        {
+                            <img class="img-responsive" src="~/Haul/bra.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Gents Undergarments")
+                        {
+                            <img class="img-responsive" src="~/Haul/underwear.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Accessories")
+                        {
+                            <img class="img-responsive" src="~/Haul/accessories.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else if (@item.PartitionKey == "Shoes")
+                        {
+                            <img class="img-responsive" src="~/Haul/shoes.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
+                        else
+                        {
+                            <img class="img-responsive" src="~/tailor.png" height="270" width="200" style="display:block; margin-left:auto; margin-right:auto" />
+                        }
 
-                </div>
-                <div class="caption" style="border-top:3px solid #808080">
+                    </div>
+                    </div>
+                    <div class="caption" style="border-top:3px solid #808080">
 
-                    @{
-                        var detail = new Dictionary<string, string>
-                                                                                {
+                        @{
+                            var detail = new Dictionary<string, string>
+                                                                                            {
                             { "partitionkey", item.PartitionKey},
                             { "rowkey", item.RowKey}
                         };
-                    }
-                    <h3 style="text-align:center">@item.clothes </h3>
-                    <h5>
-                        Category: @item.PartitionKey
-                        <br />
-                        Brand: @item.brand
-                        <br />
-                        Description: @item.description
-                    </h5>
+                        }
+                        <h3 style="text-align:center">@item.clothes </h3>
+                        <h5>
+                            Category: @item.PartitionKey
+                            <br />
+                            Brand: @item.brand
+                            <br />
+                            Description: @item.description
+                        </h5>
 
-                    @{
-                        var param = new Dictionary<string, string>
-                                                                               {
+                        @{
+                            var param = new Dictionary<string, string>
+                                                                                           {
                         { "partitionkey", item.PartitionKey},
                         { "rowkey", item.RowKey}
                    };
-                    }
-                    <div style="text-align:center">
-                        <a asp-action="Edit" asp-all-route-data="param">Edit</a> |
+                        }
+                        <div style="text-align:center">
+                            <a asp-action="Edit" asp-all-route-data="param">Edit</a> |
 
-                        <a asp-action="Delete" asp-all-route-data="param">Delete</a>
+                            <a asp-action="Delete" asp-all-route-data="param">Delete</a>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     }
 
 </div>

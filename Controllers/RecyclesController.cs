@@ -23,6 +23,23 @@ namespace WardRobe.Views.Recycles
         {
             _context = context;
         }
+        private CloudBlobContainer GetCloudBlobContainer()
+        {
+            //Link to the appsettings.json file
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+            IConfigurationRoot configure = builder.Build();
+
+            //Once link, time to read content from connection string
+            CloudStorageAccount objectaccount =
+                CloudStorageAccount.Parse(configure["ConnectionStrings:wardrobe6"]);
+            CloudBlobClient blobclient = objectaccount.CreateCloudBlobClient();
+
+            //create the container inside the stroage account
+            CloudBlobContainer container = blobclient.GetContainerReference("wardrobe");
+            return container;
+        }
 
         // GET: Recycles
         public async Task<IActionResult> Index()
@@ -70,23 +87,6 @@ namespace WardRobe.Views.Recycles
             return View(recycle);
         }
 
-        private CloudBlobContainer GetCloudBlobContainer()
-        {
-            //Link to the appsettings.json file
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-            IConfigurationRoot configure = builder.Build();
-
-            //Once link, time to read content from connection string
-            CloudStorageAccount objectaccount =
-                CloudStorageAccount.Parse(configure["ConnectionStrings:wardrobe4"]);
-            CloudBlobClient blobclient = objectaccount.CreateCloudBlobClient();
-
-            //create the container inside the stroage account
-            CloudBlobContainer container = blobclient.GetContainerReference("wardrobe");
-            return container;
-        }
 
         // GET: Recycles/Create
         public IActionResult Create()

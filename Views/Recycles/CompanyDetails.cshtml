@@ -1,55 +1,78 @@
 ﻿@model WardRobe.Models.Recycle
 @{
-    ViewData["Title"] = "RecycleCompany";
+    ViewData["Title"] = "Organisation Details";
 }
 
-    <h2  style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Oragnisation Details</h2>
+<h2 style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Oragnisation Details</h2>
 
-    <div>
+<div>
 
-        <dl class="dl-horizontal">
-            <dt>
-                Logo
-            </dt>
-            <dd>
-                <img src="@Html.DisplayFor(model => model.ImageUrl)" width="100px" height="100px" />
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                Category & Type
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Type)
-            </dd>
-            <dt>
-                Phone Number
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNo)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Website)
-            </dt>
-            <dd>
-                <a href="@Model.Website">@Html.DisplayFor(model => model.Website)</a>
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Location)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Location)
-            </dd>
-            
-            
-        </dl>
-        
-    </div>
-    <div>
-        <a class="btn btn-info" asp-action="RecycleCompany"> Back to List</a>
-    </div>
+    <dl class="dl-horizontal">
 
+        <dd>
+            <img src="@Html.DisplayFor(model => model.ImageUrl)" width="100px" height="100px" />
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd style="padding-left:15px;padding-right:20px">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <br />
+        <dt>
+            Category & Type
+        </dt>
+        <dd style="padding-left:15px;padding-right:20px">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <br />
+        <dt>
+            Phone Number
+        </dt>
+        <dd>
+            <input id="myPhone" style="text-align:left" value="@Html.DisplayFor(model => model.PhoneNo)"class="btn btn-link" button onclick="phone()" readonly>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+        <dd style="padding-left:15px;padding-right:20px">
+            <a href="@Model.Website" target="_blank">@Html.DisplayFor(model => model.Website)</a>
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd style="padding-left:15px;padding-right:20px">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+
+    </dl>
+
+</div>
+<div style="padding-left:100px">
+    <a  class="btn btn-info" asp-action="RecycleCompany"> Back to List</a>
+</div>
+
+@section Scripts
+{
+    <script>
+        function phone() {
+            /* Get the text field */
+            var copyText = document.getElementById("myPhone");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+    </script>
+}

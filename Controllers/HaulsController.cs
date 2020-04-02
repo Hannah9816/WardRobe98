@@ -28,7 +28,7 @@ namespace WardRobe.Controllers
                 .AddJsonFile("appsettings.json");
             IConfigurationRoot configuration = builder.Build();
             CloudStorageAccount storageaccount =
-                CloudStorageAccount.Parse(configuration["ConnectionStrings:wardrobe4"]);
+                CloudStorageAccount.Parse(configuration["ConnectionStrings:wardrobe6"]);
             return storageaccount;
         }
 

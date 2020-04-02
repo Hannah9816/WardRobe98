@@ -1,7 +1,7 @@
 ﻿@model WardRobe.Models.Recycle
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Recycling Organisation";
 }
 
 <h2 style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Delete Recycling Organisation</h2>
@@ -51,7 +51,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

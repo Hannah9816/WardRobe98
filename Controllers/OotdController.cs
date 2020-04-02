@@ -31,7 +31,6 @@ namespace WardRobe.Controllers
         {
             var userid = _userManager.GetUserId(HttpContext.User);
 
-
             var events = db.Calendar.Where(e => e.UserId == userid).Select(e => new
             {
                 id = e.Id,

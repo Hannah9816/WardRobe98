@@ -12,7 +12,11 @@ namespace WardRobe.Models
 
         [Display(Name = "Trip Name")]
         public string TripName { get; set; }
+
+        [Display(Name = "Start Date")]
         public DateTime Date { get; set; }
+
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
         public string UserId { get; set; }
     }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WardRobe.Models.Contact>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Messages";
 }
 
     <h2 class="text-center" style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Messages</h2>
@@ -10,12 +10,14 @@
 <table class="table">
     <thead>
         <tr>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -27,16 +29,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Subject)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">@item.Status</a>
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
-
             <td>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.ID">Update Status</a>
+            
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>

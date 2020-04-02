@@ -14,10 +14,11 @@ namespace WardRobe.Models
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Date")]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
         public string UserId { get; set; }

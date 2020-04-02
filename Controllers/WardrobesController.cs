@@ -26,8 +26,24 @@ namespace WardRobe.Views.Wardrobes
             _context = context;
             _userManager = userManager;
         }
+        private CloudBlobContainer GetCloudBlobContainer()
+        {
+            //Link to the appsettings.json file
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+            IConfigurationRoot configure = builder.Build();
 
-       
+            //Once link, time to read content from connection string
+            CloudStorageAccount objectaccount =
+                CloudStorageAccount.Parse(configure["ConnectionStrings:wardrobe6"]);
+            CloudBlobClient blobclient = objectaccount.CreateCloudBlobClient();
+
+            //create the container inside the stroage account
+            CloudBlobContainer container = blobclient.GetContainerReference("wardrobe");
+            return container;
+        }
+
         public async Task<IActionResult> Home()
         {
             ViewBag.userid = _userManager.GetUserId(HttpContext.User);
@@ -97,23 +113,6 @@ namespace WardRobe.Views.Wardrobes
             return View(wardrobe);
         }
 
-        private CloudBlobContainer GetCloudBlobContainer()
-        {
-            //Link to the appsettings.json file
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-            IConfigurationRoot configure = builder.Build();
-
-            //Once link, time to read content from connection string
-            CloudStorageAccount objectaccount =
-                CloudStorageAccount.Parse(configure["ConnectionStrings:wardrobe4"]);
-            CloudBlobClient blobclient = objectaccount.CreateCloudBlobClient();
-
-            //create the container inside the stroage account
-            CloudBlobContainer container = blobclient.GetContainerReference("wardrobe");
-            return container;
-        }
 
         // GET: Wardrobes/Create
         public IActionResult Create()

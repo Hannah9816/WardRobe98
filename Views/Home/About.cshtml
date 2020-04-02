@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "About Us";
 }
 <div class="container-fluid main-container" style="padding-bottom:20px">
     <div class="row">
@@ -9,14 +9,76 @@
     </div>
 </div>
 
-<address>
-    <h4>WardRobe.</h4>
-    Vipod Residences Kuala Lumpur<br />
-    <abbr title="Phone">P:</abbr>
-    012-8906250
-</address>
+<div style="display:block; text-align:center">
+    <h4 style="font-family:Courier New, Courier, monospace; font-size:30px">&nbsp; WardRobe.</h4> <br/>
 
-<address>
-    <strong>Support:</strong> <a href="WardRobeSupport@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="WardRobeMarketing@example.com">Marketing@example.com</a>
-</address>
+    <abbr title="Address">📍:</abbr>
+    <a style="padding-left:25px;padding-right:35px"
+       href="https://www.google.com/search?sxsrf=ALeKk02LzrZ7ICjqVOM1YMHKI9J5yLugKw:1585728774189&ei=_0yEXsTMCMT49QPSzYO4Bg&q=Centrio%20Pantai%20Hillpark&oq=Centrio+Pantai+Hillpark&gs_lcp=CgZwc3ktYWIQAzIECCMQJzICCAAyAggAMgIIADICCAAyBAgAEEMyBAgAEEMyAggAMgIIADICCAA6BAgAEEdQ_yNY_yNgnC9oAHABeACAATGIATGSAQExmAEAoAECoAEBqgEHZ3dzLXdpeg&sclient=psy-ab&ved=2ahUKEwj_qq6C5MboAhUElEsFHZZyC3QQvS4wAHoECAsQIA&uact=5&npsic=0&rflfq=1&rlha=0&rllag=3107437,101665829,5&tbm=lcl&rldimm=9399066755831743307&lqi=ChdDZW50cmlvIFBhbnRhaSBIaWxscGFya1oiCgdjZW50cmlvIhdjZW50cmlvIHBhbnRhaSBoaWxscGFyaw&phdesc=Wp4zyiCa9rg&rldoc=1&tbs=lrf:!1m4!1u3!2m2!3m1!1e1!1m4!1u2!2m2!2m1!1e1!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1&rlst=f#rlfi=hd:;si:9399066755831743307,l,ChdDZW50cmlvIFBhbnRhaSBIaWxscGFya1oiCgdjZW50cmlvIhdjZW50cmlvIHBhbnRhaSBoaWxscGFyaw,y,Wp4zyiCa9rg;mv:[[3.1085271,101.6664014],[3.1055574999999997,101.66325909999999]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!1m4!1u2!2m2!2m1!1e1!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1"
+       target="_blank">
+        Centrio Pantai Hillpark
+    </a>
+    <br />
+    <br />
+    <abbr title="Phone">📞:</abbr>
+    <input id="myPhone" style="padding-left:8px;padding-right:20px" value="012-8906250" class="btn btn-link" button onclick="phone()" readonly>
+    <br />
+    <br />
+    <abbr title="Support">👨‍🔧:</abbr>
+    <input id="mySupport" style="padding-left:10px;padding-right:20px" value="Support@wardrobe.com" class="btn btn-link" button onclick="support()" readonly>
+    <br />
+    <br />
+    <abbr title="Marketing">Ⓜ️:</abbr>
+    <input id="myMarketing" value="Marketing@wardrobe.com" class="btn btn-link" button onclick="marketing()" readonly>
+
+</div>
+
+@section Scripts
+{
+    <script>
+        function phone() {
+             /* Get the text field */
+            var copyText = document.getElementById("myPhone");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+        function support() {
+            /* Get the text field */
+            var copyText = document.getElementById("mySupport");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+        function marketing() {
+             /* Get the text field */
+            var copyText = document.getElementById("myMarketing");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
+}

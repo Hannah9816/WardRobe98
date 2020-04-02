@@ -2,7 +2,7 @@
 @model IEnumerable<WardRobe.Models.Backpack>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Backpack.";
     var backpack = (List<Backpack>)ViewData["bacpack"];
 }
 
@@ -51,9 +51,13 @@
                 </td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+            
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+           
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+         
+            </td>
             </tr>
         }
     </tbody>

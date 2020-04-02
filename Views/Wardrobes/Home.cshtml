@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<WardRobe.Models.Wardrobe>
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Homepage";
 }
 
-    <h2 class="text-center" style="font-family:'Harlow Solid'; color:darkturquoise">Hi! You may want to wear this today. </h2>
+<h1 class="text-center" style="font-family:'Harlow Solid'; color:darkturquoise">Hi! You may want to wear this today. </h1>
 
 <div class="container">
 
     @foreach (var item in Model)
     {
         <div class="col-md-3" style="margin-bottom:25px">
-            <div class="thumbnail" style="width: 100%; height:380px">
-                <div class="thumbnail" style="width: 100%; height:250px; border-color:ghostwhite">
+            <div class="thumbnail" style="width: 100%; height:280px">
+                <div class="thumbnail" style="width: 100%; height:200px; border-color:ghostwhite">
 
                     <div class="image" style="margin-bottom:20px">
                         <img class="img-responsive" src="@item.ImageUrl" height="270" width="160" style="display:block; margin-left:auto; margin-right:auto" />
@@ -20,8 +20,8 @@
 
                 </div>
                 <div class="caption" style="border-top:2px solid #808080; text-align:center">
-                    <h3 style="font-family:'Imprint MT Shadow'"><a asp-action="Details" asp-route-id="@item.ID">@item.Name</a></h3>
-                   
+                    <h4 style="font-family:'Imprint MT Shadow'"><a asp-action="Details" asp-route-id="@item.ID">@item.Name</a></h4>
+
                 </div>
             </div>
         </div>
@@ -37,21 +37,79 @@
     </div>
 </div>
 
-<div class="container-fluid main-container" style="padding-top:20px; padding-bottom:20px">
-    <div class="row">
-        <div class="col-md-offset-1 col-md-10 content">
-            <img src="~/images/backpack.png" alt="Microsoft Azure" class="img-responsive" />
-        </div>
-    </div>
+<div style="display:block; text-align:center">
+
+    <abbr title="Address">📍:</abbr>
+    <a style="padding-left:25px;padding-right:35px"
+       href="https://www.google.com/search?sxsrf=ALeKk02LzrZ7ICjqVOM1YMHKI9J5yLugKw:1585728774189&ei=_0yEXsTMCMT49QPSzYO4Bg&q=Centrio%20Pantai%20Hillpark&oq=Centrio+Pantai+Hillpark&gs_lcp=CgZwc3ktYWIQAzIECCMQJzICCAAyAggAMgIIADICCAAyBAgAEEMyBAgAEEMyAggAMgIIADICCAA6BAgAEEdQ_yNY_yNgnC9oAHABeACAATGIATGSAQExmAEAoAECoAEBqgEHZ3dzLXdpeg&sclient=psy-ab&ved=2ahUKEwj_qq6C5MboAhUElEsFHZZyC3QQvS4wAHoECAsQIA&uact=5&npsic=0&rflfq=1&rlha=0&rllag=3107437,101665829,5&tbm=lcl&rldimm=9399066755831743307&lqi=ChdDZW50cmlvIFBhbnRhaSBIaWxscGFya1oiCgdjZW50cmlvIhdjZW50cmlvIHBhbnRhaSBoaWxscGFyaw&phdesc=Wp4zyiCa9rg&rldoc=1&tbs=lrf:!1m4!1u3!2m2!3m1!1e1!1m4!1u2!2m2!2m1!1e1!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1&rlst=f#rlfi=hd:;si:9399066755831743307,l,ChdDZW50cmlvIFBhbnRhaSBIaWxscGFya1oiCgdjZW50cmlvIhdjZW50cmlvIHBhbnRhaSBoaWxscGFyaw,y,Wp4zyiCa9rg;mv:[[3.1085271,101.6664014],[3.1055574999999997,101.66325909999999]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!1m4!1u2!2m2!2m1!1e1!2m1!1e2!2m1!1e3!3sIAE,lf:1,lf_ui:1"
+       target="_blank">
+        Centrio Pantai Hillpark
+    </a>
+    <br />
+    <br />
+    <abbr title="Phone">📞:</abbr>
+    <input id="myPhone" style="padding-left:8px;padding-right:20px" value="012-8906250" class="btn btn-link" button onclick="phone()" readonly>
+    <br />
+    <br />
+    <abbr title="Support">👨‍🔧:</abbr>
+    <input id="mySupport" style="padding-left:10px;padding-right:20px" value="Support@wardrobe.com" class="btn btn-link" button onclick="support()" readonly>
+    <br />
+    <br />
+    <abbr title="Marketing">Ⓜ️:</abbr>
+    <input id="myMarketing" value="Marketing@wardrobe.com" class="btn btn-link" button onclick="marketing()" readonly>
+
 </div>
 
-<div class="container-fluid main-container" style="padding-top:20px; padding-bottom:20px">
-    <div class="row">
-        <div class="col-md-offset-1 col-md-10 content">
-            <img src="~/images/messy.png" alt="Microsoft Azure" class="img-responsive" />
-        </div>
-    </div>
-</div>
 
+
+@section Scripts
+{
+    <script>
+        function phone() {
+            /* Get the text field */
+            var copyText = document.getElementById("myPhone");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+        function support() {
+            /* Get the text field */
+            var copyText = document.getElementById("mySupport");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+        function marketing() {
+            /* Get the text field */
+            var copyText = document.getElementById("myMarketing");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
+}
 
 

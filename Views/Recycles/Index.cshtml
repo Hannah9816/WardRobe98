@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WardRobe.Models.Recycle>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Recycling Organisations";
 }
 
 <h2 class="text-center" style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Recycling Organisations</h2>
@@ -18,15 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Type)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Website)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
@@ -37,35 +29,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNo)
-                </td>
-                <td>
-                    <a href="@item.Website">@Html.DisplayFor(model => item.Website)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+           
 
-                <td>
-                    <div class="image" style="margin-bottom:20px">
-                        <img class="img-responsive" src="@item.ImageUrl" height="330" width="220" />
-                    </div>
+            <td>
+                <div class="image" style="margin-bottom:20px">
+                    <img class="img-responsive" src="@item.ImageUrl" height="330" width="220" />
+                </div>
 
-                </td>
-                <td>
-                    <a class="btn btn-default" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                   
-                </td>
-                <td> <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a></td>
-            </tr>
+            </td>
+            <td> <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ID">Details</a>
+           
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+
+           
+             <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a></td>
+        </tr>
         }
     </tbody>
 </table>

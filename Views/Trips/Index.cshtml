@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WardRobe.Models.Trip>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Trips";
 }
 
 <h2 class="text-center" style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Trip</h2>
@@ -39,10 +39,15 @@
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                 <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a>
+            
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+
+           
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+         
             </td>
+            
         </tr>
         }
     </tbody>

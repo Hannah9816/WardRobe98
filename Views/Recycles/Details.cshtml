@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+    <h2 style="font-family:'Freestyle Script'; font-size:50px; color:darkturquoise">Oragnisation Details</h2>
 
 <div>
-    <h4>Recycle</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,6 +16,7 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+        
         <dt>
             @Html.DisplayNameFor(model => model.Type)
         </dt>
@@ -32,7 +33,7 @@
             @Html.DisplayNameFor(model => model.Website)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Website)
+            <a href="@Model.Website" target="_blank">@Html.DisplayFor(model => model.Website)</a>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Location)

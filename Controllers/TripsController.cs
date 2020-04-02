@@ -11,6 +11,7 @@ using WardRobe.Models;
 
 namespace WardRobe.Views.Trips
 {
+    
     public class TripsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -160,10 +161,12 @@ namespace WardRobe.Views.Trips
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        
 
         private bool TripExists(int id)
         {
             return _context.Trip.Any(e => e.ID == id);
         }
+
     }
 }
